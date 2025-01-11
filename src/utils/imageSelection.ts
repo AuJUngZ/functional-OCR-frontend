@@ -1,5 +1,9 @@
 import { message } from 'antd'
 import { UploadFile } from 'antd/es/upload/interface'
+import { createFetchOptions, createFormData } from './httpRequest'
+import { postOcr } from '../repository/ocr'
+import { composeAsync } from './funcltions'
+import { AppState, OCRResponse } from '../types/ocr'
 
 export const isValidImageFile = (file: File): boolean =>
     file.type.startsWith('image/')
@@ -10,48 +14,18 @@ export const createFileListEntry = (file: File): UploadFile => ({
     status: 'done',
 })
 
-export const createInitialState = () => ({
-    file: null as File | null,
-    previewUrl: '',
-    ocrResult: '',
-    isProcessing: false,
-    fileList: [] as UploadFile[],
-})
-
-export type AppState = ReturnType<typeof createInitialState>
-export type OCRResponse = {
-    text: string
-}
-
-export const createFormData = (file: File): FormData => {
-    const formData = new FormData()
-    formData.append('image', file)
-    return formData
-}
-
-export type HttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE'
-export const createFetchOptions = (method: HttpMethods) => {
-    return (formData: FormData): RequestInit => ({
-        method: method,
-        body: formData,
-    })
-}
-
 export const callOCRApi = async (file: File): Promise<OCRResponse> => {
-    try {
-        const formData = createFormData(file)
-        const options = createFetchOptions('POST')(formData)
-        const response = await fetch('/api/ocr', options)
+    const response = await composeAsync(
+        postOcr,
+        createFetchOptions('POST'),
+        createFormData
+    )(file)
 
-        if (!response.ok) {
-            throw new Error('OCR processing failed')
-        }
-
-        return await response.json()
-    } catch (error) {
-        console.error('OCR API Error:', error)
-        throw error
+    if (!response.success) {
+        throw new Error('OCR processing failed')
     }
+
+    return response.data
 }
 
 export const handleFileUpload = (

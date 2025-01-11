@@ -5,12 +5,11 @@ import FileUploader from './components/FileUploader'
 import PreviewImage from './components/PreviewImage'
 import ExtractedText from './components/ExtractedText'
 import {
-    createInitialState,
     handleFileUpload,
     handleFileRemoval,
     callOCRApi,
-    AppState,
-} from './utils'
+} from './utils/imageSelection'
+import { AppState, createInitialState } from './types/ocr'
 
 const { Title, Text } = Typography
 
