@@ -30,4 +30,6 @@ The application follows a clean architecture pattern with:
 -   **Repository**: API interaction layer
 -   **Types**: TypeScript type definitions
 
-## Project Structure
+## Preview
+![image](https://github.com/user-attachments/assets/a9663aca-8f7f-4986-8bd4-c3b958aac76a)
+
