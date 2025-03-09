@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# Functional OCR Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for Optical Character Recognition (OCR) built with React, TypeScript, and Ant Design.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application allows users to upload images and extract text from them using OCR technology. It features a clean, functional programming approach and a component-based architecture for maintainability and scalability.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+-   **Image Upload**: Drag and drop or click to upload images
+-   **OCR Processing**: Extract text from uploaded images
+-   **Text Editing**: View, edit, and save extracted text
+-   **Download Capability**: Download extracted text as a file
+-   **Responsive UI**: Clean interface that works on different devices
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+-   **React**: UI library
+-   **TypeScript**: Static typing for JavaScript
+-   **Ant Design**: UI component library
+-   **Functional Programming**: Pure functions and composition
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Architecture
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+The application follows a clean architecture pattern with:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+-   **Components**: Reusable UI components (FileUploader, PreviewImage, ExtractedText)
+-   **Utils**: Utility functions for HTTP requests and functional programming
+-   **Repository**: API interaction layer
+-   **Types**: TypeScript type definitions
+
+## Project Structure
