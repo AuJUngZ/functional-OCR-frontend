@@ -30,6 +30,10 @@ The application follows a clean architecture pattern with:
 -   **Repository**: API interaction layer
 -   **Types**: TypeScript type definitions
 
-## Preview
-![image](https://github.com/user-attachments/assets/a9663aca-8f7f-4986-8bd4-c3b958aac76a)
+## Related Repositories
 
+-   **Backend**: [functional-OCR](https://github.com/AuJUngZ/functional-OCR) - The backend service that powers this application's OCR functionality
+
+## Preview
+
+![image](https://github.com/user-attachments/assets/a9663aca-8f7f-4986-8bd4-c3b958aac76a)
