@@ -2,7 +2,7 @@ import { message } from 'antd'
 import { UploadFile } from 'antd/es/upload/interface'
 import { createFetchOptions, createFormData } from './httpRequest'
 import { postOcr } from '../repository/ocr'
-import { composeAsync } from './funcltions'
+import { pipeAsync } from './funcltions'
 import { AppState, OCRResponse } from '../types/ocr'
 
 export const isValidImageFile = (file: File): boolean =>
@@ -14,17 +14,29 @@ export const createFileListEntry = (file: File): UploadFile => ({
     status: 'done',
 })
 
-export const callOCRApi = async (file: File): Promise<OCRResponse> => {
-    const response = await composeAsync(
-        postOcr,
-        createFetchOptions('POST'),
-        createFormData
-    )(file)
+// export const callOCRApi = async (file: File): Promise<OCRResponse> => {
+//     const response = await composeAsync(
+//         postOcr,
+//         createFetchOptions('POST'),
+//         createFormData
+//     )(file)
 
+//     if (!response.success) {
+//         throw new Error('OCR processing failed')
+//     }
+
+//     return response.data
+// }
+
+export const callOCRApi = async (file: File): Promise<OCRResponse> => {
+    const response = await pipeAsync(
+        createFormData,
+        createFetchOptions('POST'),
+        postOcr
+    )(file)
     if (!response.success) {
         throw new Error('OCR processing failed')
     }
-
     return response.data
 }
 
